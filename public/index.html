@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="pedidos">
+<head>
+	<meta charset="UTF-8">
+    <base href="/">
+    <meta name="viewport" content="width=device-width">
+	<title>Listagem de Pedidos</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    
+    <!-- Library -->
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-resource.min.js"></script>
+    <script src="js/lib/angular-route.min.js"></script>
+    <script src="js/lib/angular-jwt.min.js"></script>
+
+    <!--Main file -->
+    <script src="js/main.js"></script>
+
+    <!--Services files -->
+    <script src="js/services/get-usuario.js"></script>
+
+    <!-- Directives Files -->
+
+    <!-- Controllers Files -->
+    <script src="js/controllers/login-controller.js"></script>
+    <script src="js/controllers/pedidos-controller.js"></script>
+    <script src="js/controllers/usuario-controller.js"></script>
+
+
+</head>
+<body>
+	<div class="container">
+        <ng-view></ng-view>
+    </div> 
+</body>
+</html>
