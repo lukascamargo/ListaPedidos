@@ -7,5 +7,10 @@ module.exports = function(app){
 
 	app.route('/server/pedidos')
 		.post(api.adicionaPedido);
+		
+
+	app.route('/server/pedido/:pedidoid')
+		.get(api.buscaPedido)
+		.put(api.mudaPedido);
 
 }

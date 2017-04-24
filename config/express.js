@@ -7,8 +7,8 @@ var jwt = require('jsonwebtoken');
 app.set('secret', 'sky.one');
 
 app.use(express.static('./public'));
-app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 consign({cwd: 'app'})
 	.include('api')

@@ -5,8 +5,7 @@ angular
 			if($window.localStorage.token){
 				var token = $window.localStorage.token;
 				var user = jwtHelper.decodeToken(token);
-				usuario = result._doc;
-
+				usuario = user;
 				return {
 					usuario : usuario
 				};

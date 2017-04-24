@@ -1,0 +1,32 @@
+<div class="jumbotron"> 
+    <h1 class="text-center">Dados de {{usuario.nome}}</h1>
+	
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            	<span class="input-group-btn">
+					<a href="/#/pedidos/{{usuario._id}}" class="btn btn-primary btn-block">Ver Pedidos</a>
+			    </span>
+			    <span class="input-group-btn">
+			    	<a href="/#/enderecos/{{usuario._id}}" class="btn btn-primary btn-block">Ver Endereços</a>
+			    </span>
+            </div>
+        </form>
+    </div><!-- fim col md 12 -->
+</div><!-- fim row-->
+
+<div class="row">                
+    <div class="panel panel-default"">
+		<div class="panel-heading">
+		<h3 class="panel-title text-center">{{usuario.nome}} {{usuario.sobrenome}}</h3>
+		</div>
+		<div class="panel-body">
+			<h2>CPF: {{usuario.cpf}}</h2>
+			<h2>Estado: {{usuario.rg}}</h2>
+		</div>
+	</div>
+</div>

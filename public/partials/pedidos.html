@@ -1,1 +1,40 @@
-<h1>Pedidos</h1>
+<div class="jumbotron"> 
+    <h1 class="text-center">Pedidos</h1>
+	
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="input-group">
+           		 <span class="input-group-btn">
+                    <a href="/#/pedido/novo" class="btn btn-primary btn-block">Fazer novo Pedido</a>
+                </span>
+                <input ng-model="filtro" ng-model-options="{debounce: 1000}" class="form-control btn-block" placeholder="Filtrar">
+            </div>
+            <div class="input-group">
+            	
+            	<span class="input-group-btn">
+					<a href="/#/enderecos/{{usuario._id}}" class="btn btn-primary btn-block">Ver Endereços</a>
+			    </span>
+			    <span class="input-group-btn">
+			    	<a href="/#/dadosUsuario/{{usuario._id}}" class="btn btn-primary btn-block">Dados de {{usuario.nome}}</a>
+			    </span>
+            </div>
+        </form>
+    </div><!-- fim col md 12 -->
+</div><!-- fim row-->
+
+<div class="row">                
+    <div class="panel panel-default" ng-repeat="pedido in pedidos | filter: {titulo: filtro}">
+		<div class="panel-heading">
+		<h3 class="panel-title text-center">{{pedido.titulo}}</h3>
+		</div>
+		<div class="panel-body">
+			<img class="img-responsive center-block" ng-src="{{pedido.url}}" alt="{{pedido.titulo}}">
+			<a href="/#/pedido/editar/{{pedido._id}}" class="btn btn-primary btn-block">Editar</a>
+		</div>
+	</div>
+</div>

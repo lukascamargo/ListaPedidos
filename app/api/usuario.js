@@ -9,6 +9,8 @@ module.exports = function(app){
 						sobrenome: 'Camargo',
 						email: 'lukas.fialho@gmail.com',
 						senha: '1234',
+						cpf: 'XXX-XXX-XXX-XX',
+						rg: 'XX-XXX-XXX-X',
 						enderecos : [{
 							rua : 'Av. Chucri Zaidan, 1240',
 							cidade: 'Sao Paulo',
@@ -28,6 +30,8 @@ module.exports = function(app){
 						sobrenome: 'Simpson',
 						email: 'bart.simpson@gmail.com',
 						senha: '12345',
+						cpf: 'XXX-XXX-XXX-XX',
+						rg: 'XX-XXX-XXX-X',
 						enderecos : [{
 							rua: 'Av. Santo Amaro, 2000',
 							cidade: 'Springfield',
@@ -38,9 +42,16 @@ module.exports = function(app){
 
 	api.listaEnderecos = function(req, res){
 
-		var result = usuarios.filter(function(user){
-			return user.id == req.params.usid;
-		})
+		var result = {}
+
+		for(i = 0;i < usuarios.length; i++){
+			if(req.params.usid == usuarios[i]._id){
+				result = usuarios[i];
+				i = usuarios.length + 1;
+			} else {
+				console.log('Usuario não encontrado');
+			}
+		}
 
 		if(!result){
 			console.log('Não foi possivel encontrar o usuario');
@@ -53,9 +64,16 @@ module.exports = function(app){
 
 	api.listaUsuario = function(req, res){
 
-		var result = usuarios.filter(function(user){
-			return user.id == req.params.usid;
-		})
+		var result = {}
+
+		for(i = 0;i < usuarios.length; i++){
+			if(req.params.usid == usuarios[i]._id){
+				result = usuarios[i];
+				i = usuarios.length + 1;
+			} else {
+				console.log('Usuario não encontrado');
+			}
+		}
 
 		if(!result){
 			console.log('Não foi possivel encontrar o usuario');
@@ -68,26 +86,38 @@ module.exports = function(app){
 
 	api.auth = function(req, res){
 
-		var result = usuarios.filter(function(user){
-			return user.id == req.body.email && user.senha == req.body.senha;
-		})
+		var result = {};
+		console.log('Procurando ' + req.body.email);
+		for(i = 0; i < usuarios.length; i++){
+			if(req.body.email == usuarios[i].email && req.body.senha == usuarios[i].senha){
+				result = usuarios[i];
+				disponibilizaToken(req, res, result);
+				i = usuarios.length + 1;
+			} 
+		}
 
 		if(!result){
-			console.log('Não foi possivel encontrar o usuario');
-			res.status(400);
-		} else {
-			res.status(200);
-			console.log(result);
-			var userToken = jwt.sign(result, app.get('secret'), {expiresIn:28800});
-			res.set('x-access-token', userToken);
-			res.json({type: true, data: result});
-			res.end();
+			console.log('Usuario não encontrado');
+			res.status(404);
 		}
 
 
 	};
 
-	api.me = function (req, res) {
+	var disponibilizaToken = function(req, res, result){
+		if(!result){
+			console.log('Não foi possivel encontrar o usuario');
+			res.status(400);
+		} else {
+			res.status(200);
+			var userToken = jwt.sign(result, app.get('secret'), {expiresIn:28800});
+			res.set('x-access-token', userToken);
+			res.json({type: true, data: result});
+			res.end();
+		}
+	};
+
+	api.me = function (req, res, next) {
 		var token = req.headers['x-access-token'];
 			if(token){
 				jwt.verify(token, app.set('secret'), function(err, decoded){
@@ -99,8 +129,7 @@ module.exports = function(app){
 					next();
 				});
 			} else {
-				console.log('Token não foi enviado');
-				res.sendStatus(401);
+				res.status(401);
 			}
 	};
 

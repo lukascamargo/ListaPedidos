@@ -12,7 +12,8 @@ angular
 
 			$http.post('/server/auth', {email: user.email, senha: user.senha})
 				.success(function(retorno){
-					$scope.usuario = retorno;
+					console.log(retorno.data);
+					$scope.usuario = retorno.data;
 					$location.path('/pedidos/' + $scope.usuario._id);
 					$window.location.reload();
 				}, function(err){

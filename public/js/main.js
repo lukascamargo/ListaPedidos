@@ -1,8 +1,8 @@
 angular
-	.module('pedidos', ['ngRoute'])
-	.config(function($routeProvider, $locationProvider){
+	.module('pedidos', ['ngRoute','angular-jwt'])
+	.config(function($routeProvider, $locationProvider, $httpProvider, jwtOptionsProvider){
 
-		$locationProvider.html5Mode(true);
+		$httpProvider.interceptors.push('tokenInterceptor');
 
 		$routeProvider
 			.when('/', {
@@ -17,9 +17,13 @@ angular
 				templateUrl: 'partials/pedidos.html',
 				controller: 'PedidosController'
 			})
-			.when('/pedidos/novo', {
+			.when('/pedido/novo', {
 				templateUrl: 'partials/novoPedido.html',
-				controller: 'PedidosController'
+				controller: 'PedidoController'
+			})
+			.when('/pedido/editar/:pedidoid',{
+				templateUrl: 'partials/novoPedido.html',
+				controller: 'PedidoController'
 			})
 			.when('/dadosUsuario/:usid', {
 				templateUrl: 'partials/dadosUsuario.html',

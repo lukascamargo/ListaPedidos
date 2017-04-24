@@ -1,8 +1,9 @@
 angular
 	.module('pedidos')
-	.controller('PedidosController', function($scope, meusServicos, $http){
-		$scope.usuario = meusServicos.usuario;
+	.controller('PedidosController', function($scope, getUsuario, $http, $routeParams){
+		$scope.usuario = getUsuario.usuario;
 		$scope.mensagem = '';
+		$scope.filtro = '';
 		$scope.pedidos = [];
 
 		$http.get('/server/pedidos/' + $routeParams.usid)
@@ -19,18 +20,4 @@ angular
 				$scope.mensagem = 'Não foi possível encontrar pedidos';
 			})
 
-
-		$scope.submeter = function(){
-			if($scope.formulario.$valid){
-				$http.post('/server/pedidos', $scope.pedido)
-					.success(function(){
-						$scope.mensagem = 'Pedido submetido com sucesso. Clique em voltar para visualizar na lista';
-					})
-					.error(function(error){
-						console.log({erro: error});
-						console.log('Conforme erro acima, não foi possível submeter pedido');
-						$scope.mensagem = 'Não foi possível submeter pedido';
-					})
-			}
-		}
 	});

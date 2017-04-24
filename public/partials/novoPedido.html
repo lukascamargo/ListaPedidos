@@ -1,0 +1,43 @@
+<div class="page-header text-center">
+	<h1>{{pedido.titulo}}</h1>
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<form novalidate name="formulario" class="row" ng-submit="submeterPedido()">
+	<div class="col-md-6">
+		<div class="form-group">
+			<label>Titulo</label>
+			<input ng-model="pedido.titulo" name="titulo" class="form-control" required ng-maxlength="20">
+			<span ng-show="formulario.$submitted && formulario.titulo.$error.required" class="form-control alert-danger">
+				Titulo obrigatório
+			</span>
+			<span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" class="form-control alert-danger">
+				Deve ter no máximo 20 caracteres
+			</span>
+		</div>
+		<div class="form-group">
+			<label>URL</label>
+			<input ng-model="pedido.url" name="url" class="form-control" required>
+			<span ng-show="formulario.$submitted && formulario.url.$error.required" class="form-control alert-danger">
+				Url obrigatório
+			</span>
+		</div>
+		<div class="form-group">
+			<label>Descrição</label>
+			<textarea ng-model="pedido.descricao" name="descricao" class="form-control" required="">
+			</textarea>
+			<span ng-show="formulario.$submitted && formulario.url.$error.required" class="form-control alert-danger">
+				Descrição obrigatória
+			</span>
+		</div>
+
+
+		<button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">Salvar</button>
+		<a href="/#/pedidos/{{usuario._id}}" class="btn btn-primary" meu-focus>Voltar</a>
+		<hr>
+	</div>
+	<div class="col-md-6">
+		<img class="img-responsive center-block" ng-src="{{pedido.url}}" alt="{{pedido.titulo}}">
+	</div>
+</form>
