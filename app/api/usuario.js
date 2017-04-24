@@ -22,6 +22,12 @@ module.exports = function(app){
 							cidade: 'Sao Paulo',
 							estado: 'SP',
 							pais: 'Brasil'
+						},
+						{
+							rua: 'Iacanga, 80',
+							cidade: 'Cajamar',
+							estado: 'SP',
+							pais: 'Brasil'
 						}]
 					},
 					{
@@ -37,6 +43,18 @@ module.exports = function(app){
 							cidade: 'Springfield',
 							estado: 'Oregon',
 							pais: 'Estados Unidos da America'
+						},
+						{
+							rua : 'Av. Chucri Zaidan, 1240',
+							cidade: 'Sao Paulo',
+							estado: 'SP',
+							pais: 'Brasil'
+						},
+						{
+							rua: 'Praia do Sul, 15',
+							cidade: 'Sao Paulo',
+							estado: 'SP',
+							pais: 'Brasil'
 						}]
 					}];
 

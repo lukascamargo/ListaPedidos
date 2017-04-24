@@ -37,7 +37,7 @@ angular
 					$scope.pedido.usid = $scope.usuario._id;
 					var item = $scope.pedido
 					console.log(item)
-					$http.put('/server/pedidos', item)
+					$http.post('/server/pedidos', item)
 						.success(function() {
 							$scope.mensagem = 'Pedido submetido com sucesso. Clique em voltar para visualizar na lista';
 							$scope.pedido = {};
